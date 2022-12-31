@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
+
   Random random = new Random();
   int ranNUm =0;
 
@@ -81,6 +83,65 @@ if(multipleColors ==true){
 
   }
 
+Future<void>_displayDialog() async {  
+    return showDialog(  
+        context: context,  
+        builder: (BuildContext context) {  
+          return AlertDialog(  
+            title: Text('TextField AlertDemo'),  
+            content: TextField(  
+              decoration: InputDecoration(hintText: "TextField in Dialog"),  
+            ),  
+            actions: <Widget>[  
+              new ElevatedButton(  
+                child: new Text('SUBMIT'),  
+                onPressed: () {  
+                  Navigator.of(context).pop();  
+                },  
+              )  
+            ],  
+          );  
+        });  
+  }  
+  
+
+
+
+
+  Future<void> showMyDialog() async {
+  return showDialog<void>(
+    context: context,
+    // barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Imorit dialog'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text('this is imorit dialog.'),
+              Text('whould you want to work with us?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Delete'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ), TextButton(
+            child: const Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+          
+        ],
+      );
+    },
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     
@@ -122,7 +183,162 @@ if(multipleColors ==true){
                
                              
               }, child: Text('click me'),),
+
+              ElevatedButton(onPressed:()=>{ 
+                showMyDialog()
+               
+                
+
+                
+              }, child: Text('show dialog 1'),),
+              ElevatedButton(onPressed:()=>{ 
+                Container(color: Colors.red),
+                showDialog(context: context,
+                 builder: (ctx)=> AlertDialog(
+
+                  title: const Text(' alert!'),
+                  
+                  content: Text ('are you shore to want to delete?'),
+                  
+                  actions: <Widget>[
+                    TextButton(onPressed: (){
+                      Navigator.of(ctx).pop();
+
+                    },
+                     child: Container(color: Colors.green,
+                     padding: EdgeInsets.all(14),
+                     child: const Text('okay')
+                     
+                     ,))
+
+
+                  ],
+
+                 )
+                                
+                 )
+                
+              
+              }, child: Text('show simple Dialog'),),
+              ElevatedButton(onPressed:()=>{ 
+                Container(color: Colors.red),
+                showDialog(context: context,
+                 builder: (ctx)=> SimpleDialog(
+
+                  title: const Text(' alert!'),
+                  children:<Widget> [
+                    SimpleDialogOption(onPressed: (){
+                      
+                      Navigator.of(context).pop();
+                    },
+                    child:const Text('easy'),
+                    ),
+                    SimpleDialogOption(onPressed: ()=>{
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                       content: Text("easy"),
+                           )),
+                      Navigator.of(context).pop() 
+                      },
+                    child: Text('medium'),),
+                     SimpleDialogOption(onPressed: ()=>{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                       content: Text("medium"),
+                           )),
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                       content: Text("hard"),
+                           )),
+                      Navigator.of(context).pop()
+
+                    },
+                    child: Text('hard'),)
+
+
+                  ],
+                  
+                    )
+                                
+                 )
+                
+              
+              }, child: Text('show dialog 2'),), 
+
+               ElevatedButton(onPressed:()=>{ 
+                _displayDialog()
+
+               
+                 
+
+
+   }, child: Text('text field dialog'), ),
+
+   TextField(
+        decoration: const InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 2.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.green, width: 2.0),
+          ),
+          hintText: 'Enter your name',
+        ),
+        // controller: _controller,
+        onSubmitted: (String value) {
+          debugPrint(value);
+        },
+      ),
+               
+
+        Center(
+      child: Container(
+       height: 150.0,
+     width: 150.0,
+     color: Color.fromARGB(255, 237, 17, 50),
+     child: const Align(
+      alignment: Alignment.topRight,
+      child: Text(
+        'mahsa',
+      ),
+    ),
+  ),
+),
+
+
+// Center(
+//   child: Container(
+//     height: 120.0,
+//     width: 120.0,
+//     color: Colors.blue[50],
+//     child: const Align(
+//       alignment: Alignment(0.2, 0.6),
+//       child: FlutterLogo(
+//         size: 60,
+//       ),
+//     ),
+//   ),
+// ),
+
+Center(
+  child: Container(
+    height: 120.0,
+    width: 120.0,
+    color: Colors.blue[100],
+    child: const Align(
+      alignment: FractionalOffset(0, 1),
+      child: FlutterLogo(
+        size: 60,
+      ),
+    ),
+  ),
+)
+                  
+
+                                
+                  
+                
+              
+              
             
+             
           ],
         ),
       ),
